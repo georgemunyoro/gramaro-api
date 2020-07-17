@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --trace-warnings index.js"
+    "dev": "nodemon --trace-warnings index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
