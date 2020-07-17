@@ -97,7 +97,7 @@ router.delete("/:noteId", async (req, res) => {
   }
 });
 
-router.get("/:user", async (req, res) => {
+router.get("/u/:user", async (req, res) => {
   const { user } = req.params;
   try {
 	const client = getDatabase();
@@ -107,6 +107,23 @@ router.get("/:user", async (req, res) => {
 	  data: {
 		user: user,
 		notes: notes || null
+	  }
+	});
+	client.end();
+  } catch (error) {
+	handleUnexpectedError(res, error);
+  }
+});
+
+router.get("/id/:noteId", async (req, res) => {
+  const { noteId } = req.params;
+  try {
+	const client = getDatabase();
+	const { rows } = await client.query(`SELECT * FROM NOTES WHERE ID='${noteId}'`);
+	res.json({
+	  message: "note",
+	  data: {
+		note: rows[0]
 	  }
 	});
 	client.end();

@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
 
 	  if (accountsWithEmail.length != 0) {
 		res.json({
-		  message: "the email already exists",
+		  message: "The email is already registered to a user",
 		  data: null
 		});
 		return;
@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
 	  const queryValues = [uuid, username, password, email];
 	  const { rows } = await client.query("INSERT INTO USERS(ID, USERNAME, PASSWORD, EMAIL) VALUES($1, $2, $3, $4)", queryValues);
 	  res.json({
-		message: "user created successfully",
+		message: "Your account was created successfully and you are now logged in",
 		data: {
 		  createdUser: {
 			id: uuid,

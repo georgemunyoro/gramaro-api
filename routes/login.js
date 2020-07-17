@@ -31,7 +31,10 @@ router.post("/", async (req, res) => {
 
 	  res.json({
 		message: "ok",
-		data: { uuid: user[0].id }
+		data: { 
+			uuid: user[0].id,
+			username: user[0].username
+		}
 	  });
 
 	  client.end();
