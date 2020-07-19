@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 const { fetchUsers, handleUnexpectedError, handleEmptyData } = require("./routes/helpers");
-const { getDatabase } = require("./database");
+const { getDatabaseConnection } = require("./database");
 const { nanoid } = require("nanoid");
 
 require("dotenv/config");
@@ -53,4 +53,7 @@ app.listen(PORT, (error) => {
   }
   console.log(`Started on PORT:${PORT}`);
 });
+
+module.exports = app;
+
 

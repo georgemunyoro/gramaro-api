@@ -1,6 +1,6 @@
 const { customAlphabet } = require("nanoid");
 const nanoid = customAlphabet('1234567890abcdef_', 10);
-const { getDatabase } = require("../database");
+const { getDatabaseConnection } = require("../database");
 
 const handleEmptyData = (req, res) => {
   const { username, password, email } = req.body;
@@ -25,7 +25,7 @@ const handleUnexpectedError = (res, error) => {
 
 const fetchUsers = async (callback) => {
   try {
-	const client = getDatabase();
+	const client = getDatabaseConnection();
 	const { rows: users } = await client.query("SELECT * FROM USERS");
 	client.end();
 	callback(false, users);

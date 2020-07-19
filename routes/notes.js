@@ -1,28 +1,21 @@
-const express = require("express");
-
-const { customAlphabet } = require("nanoid");
-const nanoid = customAlphabet('1234567890abcdef_', 10);
 
 const { handleUnexpectedError, handleEmptyData } = require("./helpers");
-const { getDatabase } =require("../database");
+const { getDatabaseConnection } =require("../database");
 
+const nanoid = require("nanoid").customAlphabet('1234567890abcdef_', 10);
+const express = require("express");
 const router = express.Router();
-
-router.get("/", (req, res) => {
-  res.json({
-	message: "notes",
-	data: null
-  })
-});
 
 router.get("/all", async (req, res) => {
   try {
-	const client = getDatabase();
+	const client = getDatabaseConnection();
 	const { rows: notes } = await client.query("SELECT * FROM NOTES");
 
 	res.json({
 	  message: "notes",
-	  data: { notes: notes || null }
+	  data: {
+		notes: notes || [],
+	  }
 	});
 
 	client.end();
@@ -35,7 +28,7 @@ router.post("/", async (req, res) => {
   const { title, contents, owner } = req.body;
   const uniqueNoteId = nanoid(12);
   try {
-	const client = getDatabase();
+	const client = getDatabaseConnection();
 	const queryData = [uniqueNoteId, title, contents, owner];
 	const { rows } = await client.query("INSERT INTO NOTES (ID, TITLE, CONTENT, OWNER) VALUES ($1, $2, $3, $4)", queryData);
 	res.json({
@@ -45,9 +38,9 @@ router.post("/", async (req, res) => {
 		  id: uniqueNoteId,
 		  owner: owner,
 		  title: title,
-		  contents: contents
+		  contents: contents,
 		},
-		rows: rows
+		rows: rows,
 	  }
 	});
 	client.end();
@@ -60,7 +53,7 @@ router.patch("/:noteId", async (req, res) => {
   const { noteId } = req.params;
   const { title, contents } = req.body;
   try {
-	const client = getDatabase();
+	const client = getDatabaseConnection();
 	const { rows } = await client.query(`UPDATE NOTES SET TITLE='${title}', CONTENT='${contents}' WHERE ID='${noteId}'`);
 	res.json({
 	  message: "update note",
@@ -68,9 +61,9 @@ router.patch("/:noteId", async (req, res) => {
 		note: {
 		  noteId: noteId,
 		  title: title,
-		  contents: contents
+		  contents: contents,
 		},
-		rows: rows
+		rows: rows,
 	  }
 	});
 	client.end();
@@ -82,13 +75,13 @@ router.patch("/:noteId", async (req, res) => {
 router.delete("/:noteId", async (req, res) => {
   const { noteId } = req.params;
   try {
-	const client = getDatabase();
+	const client = getDatabaseConnection();
 	const { rows } = await client.query(`DELETE FROM NOTES WHERE ID='${noteId}'`);
 	res.json({
 	  message: "note deleted",
 	  data: {
 		noteId: noteId,
-		note: rows
+		note: rows,
 	  }
 	});
 	client.end();
@@ -100,13 +93,13 @@ router.delete("/:noteId", async (req, res) => {
 router.get("/u/:user", async (req, res) => {
   const { user } = req.params;
   try {
-	const client = getDatabase();
+	const client = getDatabaseConnection();
 	const { rows: notes } = await client.query(`SELECT * FROM NOTES WHERE OWNER='${user}'`);
 	res.json({
 	  message: "user notes",
 	  data: {
 		user: user,
-		notes: notes || null
+		notes: notes || null,
 	  }
 	});
 	client.end();
@@ -118,12 +111,12 @@ router.get("/u/:user", async (req, res) => {
 router.get("/id/:noteId", async (req, res) => {
   const { noteId } = req.params;
   try {
-	const client = getDatabase();
+	const client = getDatabaseConnection();
 	const { rows } = await client.query(`SELECT * FROM NOTES WHERE ID='${noteId}'`);
 	res.json({
 	  message: "note",
 	  data: {
-		note: rows[0]
+		note: rows[0],
 	  }
 	});
 	client.end();
