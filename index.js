@@ -29,7 +29,6 @@ app.get("/", (req, res) => {
   })
 });
 
-// return a list of all users
 app.get("/users", async (req, res) => {
   fetchUsers((error, users) => {
 	if (error) {
@@ -45,7 +44,7 @@ app.get("/users", async (req, res) => {
   })
 })
 
-const PORT = process.env.PORT || 5432;
+const PORT = process.env.CI ? 5432 : (process.env.PORT || 1234);
 
 app.listen(PORT, (error) => {
   if (error) {

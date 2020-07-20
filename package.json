@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --trace-warnings index.js",
     "start": "node --trace-warnings index.js",
-    "test": "mocha"
+    "test": "CI=true mocha"
   },
   "keywords": [],
   "author": "",
