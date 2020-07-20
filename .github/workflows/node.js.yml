@@ -30,9 +30,9 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.2.6
+      - name: Deploy
+        uses: akhileshns/heroku-deploy@v3.2.6
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "gramaro-api"
