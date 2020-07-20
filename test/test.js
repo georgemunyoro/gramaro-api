@@ -160,6 +160,27 @@ describe('Notes', () => {
 	done()
   })
 
+  it('Trash notes', (done) => {
+	createdNotes.forEach(note => {
+	  chai.request(server)
+		.patch('/notes/trash/'+note.id)
+		.end((err, result) => {
+		  result.should.have.status(200)
+
+		  // Ensure no notes left in database
+		  if (note.id == createdNotes[createdNotes.length-1].id) {
+			chai.request(server)
+			  .get('/notes/all')
+			  .end((_err, _result) => {
+				_result.should.have.status(200)
+				chai.assert.equal(_result.body.data.notes.filter(note => (note.status == 'trash')).length, 3)
+				done()
+			  })
+		  }
+		})
+	})
+  })
+
   it('Delete notes', (done) => {
 	createdNotes.forEach(note => {
 	  chai.request(server)

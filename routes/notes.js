@@ -49,6 +49,25 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.patch("/trash/:noteId", async (req, res) => {
+  const { noteId } = req.params;
+  try {
+	const databaseConnection = getDatabaseConnection();
+	const { rows } = await databaseConnection.query(`UPDATE NOTES SET STATUS='trash' WHERE ID='${noteId}'`);
+	res.json({
+	  message: "trashed note",
+	  data: {
+		note: {
+		  noteId: noteId,
+		  status: 'trash',
+		}
+	  }
+	})
+  } catch (error) {
+	handleUnexpectedError(error);
+  }
+});
+
 router.patch("/:noteId", async (req, res) => {
   const { noteId } = req.params;
   const { title, contents } = req.body;
