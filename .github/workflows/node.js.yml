@@ -25,6 +25,7 @@ jobs:
           npm test
         env:
           CI: true
+          CI_DB_CONNECTION_STRING: ${{ secrets.CI_DB_CONNECTION_STRING }}
 
   deploy:
     needs: [test]
