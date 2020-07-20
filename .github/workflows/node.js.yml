@@ -1,28 +1,41 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Node.js CI
+name: Node Github CI
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
-jobs:
-  build:
+    jobs:
+      test:
 
-    runs-on: ubuntu-latest
+        runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x]
+        strategy:
+          matrix:
+            node-version: [8.x, 10.x, 12.x]
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm test
+            steps:
+              - uses: actions/checkout@v2
+              - name: Use Node.js ${{ matrix.node-version }}
+                uses: actions/setup-node@v1
+                with:
+                  node-version: ${{ matrix.node-version }}
+              - name: npm install and test
+                run: |
+                  npm install
+                  npm test
+                env:
+                  CI: true
+
+                  deploy:
+                    needs: [test]
+                    runs-on: ubuntu-latest
+
+                    steps:
+                      - name: Deploy
+                        - uses: actions/checkout@v2
+                        - uses: akhileshns/heroku-deploy@v3.2.6
+                          with:
+                            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+                            heroku_app_name: "gramaro-api"
+                            heroku_email: ${{ secrets.HEROKU_EMAIL  }}
