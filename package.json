@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --trace-warnings index.js",
-    "start": "node index.js",
+    "start": "node --trace-warnings index.js",
     "test": "mocha"
   },
   "keywords": [],
