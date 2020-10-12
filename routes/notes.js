@@ -15,7 +15,7 @@ router.get("/all", async (req, res) => {
 	  message: "notes",
 	  data: {
 		notes: notes || [],
-	  }
+	  },
 	});
 
 	client.end();
@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
 		  contents: contents,
 		},
 		rows: rows,
-	  }
+	  },
 	});
 	client.end();
   } catch (error) {
@@ -61,7 +61,7 @@ router.patch("/trash/:noteId", async (req, res) => {
 		  noteId: noteId,
 		  status: 'trash',
 		}
-	  }
+	  },
 	})
   } catch (error) {
 	handleUnexpectedError(error);
@@ -83,7 +83,7 @@ router.patch("/:noteId", async (req, res) => {
 		  contents: contents,
 		},
 		rows: rows,
-	  }
+	  },
 	});
 	client.end();
   } catch (error) {
@@ -101,7 +101,7 @@ router.delete("/:noteId", async (req, res) => {
 	  data: {
 		noteId: noteId,
 		note: rows,
-	  }
+	  },
 	});
 	client.end();
   } catch (error) {
@@ -119,7 +119,7 @@ router.get("/u/:user", async (req, res) => {
 	  data: {
 		user: user,
 		notes: notes || null,
-	  }
+	  },
 	});
 	client.end();
   } catch (error) {
@@ -136,7 +136,7 @@ router.get("/id/:noteId", async (req, res) => {
 	  message: "note",
 	  data: {
 		note: rows[0],
-	  }
+	  },
 	});
 	client.end();
   } catch (error) {
