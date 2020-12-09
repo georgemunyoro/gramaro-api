@@ -1,5 +1,3 @@
-const { customAlphabet } = require("nanoid");
-const nanoid = customAlphabet('1234567890abcdef_', 10);
 const { getDatabaseConnection } = require("../database");
 
 const handleEmptyData = (req, res) => {
