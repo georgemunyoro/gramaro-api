@@ -1,15 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 
-const { fetchUsers, handleUnexpectedError, handleEmptyData } = require("./routes/helpers");
-const { getDatabaseConnection } = require("./database");
-const { nanoid } = require("nanoid");
+const { fetchUsers, handleUnexpectedError } = require("./routes/helpers");
 
 require("dotenv/config");
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -25,34 +23,32 @@ app.use("/notes", notesRoute);
 
 app.get("/", (req, res) => {
   res.status(200).json({
-	message: "gramaro notes api v0.0.1"
-  })
+    message: "gramaro notes api v0.0.1",
+  });
 });
 
-app.get("/users", async (req, res) => {
+app.get("/users", async (_req, res) => {
   fetchUsers((error, users) => {
-	if (error) {
-	  handleUnexpectedError(res, error);
-	} else {
-	  res.status(200).json({
-		message: "ok",
-		data: {
-		  users: users
-		}
-	  })
-	}
-  })
-})
+    if (error) {
+      handleUnexpectedError(res, error);
+    } else {
+      res.status(200).json({
+        message: "ok",
+        data: {
+          users: users,
+        },
+      });
+    }
+  });
+});
 
-const PORT = process.env.CI ? 5432 : (process.env.PORT || 1234);
+const PORT = process.env.CI ? 5432 : process.env.PORT || 1234;
 
 app.listen(PORT, (error) => {
   if (error) {
-	throw err;
+    throw err;
   }
-  console.log(`Started on PORT:${PORT}`);
+  console.log(`Server listening on PORT:${PORT}`);
 });
 
 module.exports = app;
-
-
