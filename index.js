@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 const cors = require("cors");
 
 const { fetchUsers, handleUnexpectedError } = require("./routes/helpers");
@@ -7,6 +8,7 @@ require("dotenv/config");
 
 const app = express();
 
+app.use(morgan('combined'))
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
