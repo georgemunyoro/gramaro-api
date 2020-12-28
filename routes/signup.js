@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 
 const { customAlphabet } = require("nanoid");
 const nanoid = customAlphabet("1234567890abcdef_", 10);
@@ -32,8 +33,10 @@ router.post("/", async (req, res) => {
         return;
       }
 
+      const hashedPassword = await bcrypt.hash(password, 10);
+
       // if not, create the account
-      const queryValues = [uuid, username, password, email];
+      const queryValues = [uuid, username, hashedPassword, email];
       const { rows } = await client.query(
         "INSERT INTO USERS(ID, USERNAME, PASSWORD, EMAIL) VALUES($1, $2, $3, $4)",
         queryValues
