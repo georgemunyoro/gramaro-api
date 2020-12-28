@@ -1,4 +1,6 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const { handleEmptyData, handleUnexpectedError } = require("./helpers");
 const { getDatabaseConnection } = require("../database");
@@ -21,7 +23,8 @@ router.post("/", async (req, res) => {
         return;
       }
 
-      if (user[0].password !== password) {
+      const isPasswordCorrect = await bcrypt.compare(password, user[0].password);
+      if (!isPasswordCorrect) {
         res.json({ message: "Incorrect password" });
         return;
       }
