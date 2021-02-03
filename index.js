@@ -48,7 +48,7 @@ const PORT = process.env.CI ? 5432 : process.env.PORT || 1234;
 
 app.listen(PORT, (error) => {
   if (error) {
-    throw err;
+    throw error;
   }
   console.log(`Server listening on PORT:${PORT}`);
 });
