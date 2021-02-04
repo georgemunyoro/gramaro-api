@@ -1,4 +1,4 @@
-const { getDatabaseConnection } = require("../database");
+const { getDatabaseConnection } = require("../utils/db/connection");
 
 const handleEmptyData = (req, res) => {
   res.json({
