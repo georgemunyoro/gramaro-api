@@ -1,12 +1,13 @@
 {
   "name": "server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --trace-warnings index.js",
     "start": "node --trace-warnings index.js",
-    "test": "CI=true mocha"
+    "test": "CI=true mocha",
+    "release": "standard-version"
   },
   "keywords": [],
   "author": "",
@@ -24,5 +25,13 @@
     "nanoid": "^3.1.10",
     "pg": "^8.2.1",
     "store": "^2.0.12"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
