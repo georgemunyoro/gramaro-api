@@ -23,7 +23,10 @@ router.post("/", async (req, res) => {
         return;
       }
 
-      const isPasswordCorrect = await bcrypt.compare(password, user[0].password);
+      const isPasswordCorrect = await bcrypt.compare(
+        password,
+        user[0].password
+      );
       if (!isPasswordCorrect) {
         res.json({ message: "Incorrect password" });
         return;
