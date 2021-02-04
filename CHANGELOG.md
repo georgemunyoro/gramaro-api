@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://github.com/georgemunyoro/gramaro-api/compare/v1.0.1...v1.0.2) (2021-02-04)
+
+
+### Bug Fixes
+
+* **test/test.js:** fix incorrect relative path ([a3799a0](https://github.com/georgemunyoro/gramaro-api/commit/a3799a0ba06187f917388e32a82b44f6fe5243ed))
+
 ### [1.0.1](https://github.com/georgemunyoro/gramaro-api/compare/v1.0.0...v1.0.1) (2021-02-04)
 
 ## 1.0.0 (2021-02-03)
