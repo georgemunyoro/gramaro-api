@@ -1,7 +1,7 @@
 const { getDatabaseConnection } = require("./connection");
 const bcrypt = require("bcrypt");
 
-const getUser = (userId) => {
+const getUser = (email) => {
   return new Promise(async (resolve, reject) => {
     try {
       const databaseConnection = getDatabaseConnection();
@@ -27,4 +27,5 @@ const checkIfPasswordCorrect = async (user, password) => {
 module.exports = {
   getUser,
   getNote,
+  checkIfPasswordCorrect
 };
