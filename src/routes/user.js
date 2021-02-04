@@ -4,9 +4,9 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   res.json({
-    message: "user",
-    data: {
-      user: req.body,
+    message : "user",
+    data : {
+      user : req.body,
     },
   });
 });

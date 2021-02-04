@@ -1,17 +1,17 @@
-const { getDatabaseConnection } = require("../database");
+const {getDatabaseConnection} = require("../database");
 
 const handleEmptyData = (req, res) => {
   res.json({
-    message: "insufficient user information",
-    data: req.body,
+    message : "insufficient user information",
+    data : req.body,
   });
 };
 
 const handleUnexpectedError = (res, error) => {
   res.json({
-    message: "An unexpected error ocurred",
-    data: {
-      stack: error.stack || null,
+    message : "An unexpected error ocurred",
+    data : {
+      stack : error.stack || null,
     },
   });
 };
@@ -19,7 +19,7 @@ const handleUnexpectedError = (res, error) => {
 const fetchUsers = async (callback) => {
   try {
     const client = getDatabaseConnection();
-    const { rows: users } = await client.query("SELECT * FROM USERS");
+    const {rows : users} = await client.query("SELECT * FROM USERS");
     client.end();
     callback(false, users);
   } catch (error) {
@@ -28,7 +28,7 @@ const fetchUsers = async (callback) => {
 };
 
 module.exports = {
-  fetchUsers: fetchUsers,
-  handleUnexpectedError: handleUnexpectedError,
-  handleEmptyData: handleEmptyData,
+  fetchUsers : fetchUsers,
+  handleUnexpectedError : handleUnexpectedError,
+  handleEmptyData : handleEmptyData,
 };
