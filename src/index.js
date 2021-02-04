@@ -48,9 +48,7 @@ app.get("/users", async (_req, res) => {
 const PORT = process.env.CI ? 5432 : process.env.PORT || 1234;
 
 app.listen(PORT, (error) => {
-  if (error) {
-    throw error;
-  }
+  if (error) throw error;
   console.log(`Server listening on PORT:${PORT}`);
 });
 
