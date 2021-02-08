@@ -1,11 +1,11 @@
 {
   "name": "server",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --trace-warnings index.js",
-    "start": "node --trace-warnings index.js",
+    "dev": "nodemon --trace-warnings src/index.js",
+    "start": "node --trace-warnings src/index.js",
     "test": "CI=true mocha",
     "release": "standard-version"
   },
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^2.16.0",
     "bcrypt": "^5.0.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
@@ -27,7 +28,8 @@
     "store": "^2.0.12"
   },
   "devDependencies": {
-    "cz-conventional-changelog": "3.3.0"
+    "cz-conventional-changelog": "3.3.0",
+    "prisma": "^2.16.0"
   },
   "config": {
     "commitizen": {

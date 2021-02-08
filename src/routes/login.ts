@@ -2,8 +2,8 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const { handleEmptyData, handleUnexpectedError } = require("./helpers");
-const { getDatabaseConnection } = require("../database");
+const { handleEmptyData, handleUnexpectedError } = require("../utils");
+const { getDatabaseConnection } = require("../utils/db/connection");
 
 const router = express.Router();
 

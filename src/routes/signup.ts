@@ -4,8 +4,8 @@ const bcrypt = require("bcrypt");
 const { customAlphabet } = require("nanoid");
 const nanoid = customAlphabet("1234567890abcdef_", 10);
 
-const { getDatabaseConnection } = require("../database");
-const { handleEmptyData, handleUnexpectedError } = require("./helpers");
+const { getDatabaseConnection } = require("../utils/db/connection");
+const { handleEmptyData, handleUnexpectedError } = require("../utils/index");
 
 const router = express.Router();
 

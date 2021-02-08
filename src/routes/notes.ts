@@ -1,5 +1,5 @@
-const { handleUnexpectedError } = require("./helpers");
-const { getDatabaseConnection } = require("../database");
+const { handleUnexpectedError } = require("../utils");
+const { getDatabaseConnection } = require("../utils/db/connection");
 
 const nanoid = require("nanoid").customAlphabet("1234567890abcdef_", 10);
 const express = require("express");

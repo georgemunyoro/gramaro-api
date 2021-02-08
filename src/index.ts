@@ -1,14 +1,15 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const { version } = require("../package.json");
 
-const { fetchUsers, handleUnexpectedError } = require("./routes/helpers");
+const { fetchUsers, handleUnexpectedError } = require("./utils");
 
 require("dotenv/config");
 
 const app = express();
 
-app.use(morgan('dev'))
+app.use(morgan("dev"));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -25,7 +26,7 @@ app.use("/notes", notesRoute);
 
 app.get("/", (req, res) => {
   res.status(200).json({
-    message: "gramaro notes api v0.0.1",
+    message: `gramaro notes api v${version}`,
   });
 });
 
@@ -47,9 +48,7 @@ app.get("/users", async (_req, res) => {
 const PORT = process.env.CI ? 5432 : process.env.PORT || 1234;
 
 app.listen(PORT, (error) => {
-  if (error) {
-    throw error;
-  }
+  if (error) throw error;
   console.log(`Server listening on PORT:${PORT}`);
 });
 
