@@ -19,9 +19,11 @@ model User {
 }
 
 model Note {
-  id       Int    @unique @default(autoincrement())
-  uuid     String @unique @default(uuid())
-  owner    User   @relation(fields: [userId], references: [id])
-  contents Json
-  userId   Int
+  id        Int      @unique @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  owner     User     @relation(fields: [ownerId], references: [id])
+  contents  Json
+  ownerId   Int
 }
