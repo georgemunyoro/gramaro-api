@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --trace-warnings src/index.js",
-    "start": "node --trace-warnings src/index.js",
+    "dev": "nodemon --trace-warnings dist/index.js",
+    "start": "tsc && node --trace-warnings dist/index.js",
     "test": "CI=true mocha",
     "release": "standard-version"
   },
