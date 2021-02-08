@@ -25,5 +25,6 @@ model Note {
   updatedAt DateTime @default(now())
   owner     User     @relation(fields: [ownerId], references: [id])
   contents  Json
+  title     String
   ownerId   Int
 }
