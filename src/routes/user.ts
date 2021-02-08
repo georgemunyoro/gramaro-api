@@ -1,8 +1,8 @@
 const express = require("express");
 
-const router = express.Router();
+const usersRouter = express.Router();
 
-router.get("/", async (req, res) => {
+usersRouter.get("/", async (req, res) => {
   res.json({
     message: "user",
     data: {
@@ -11,4 +11,4 @@ router.get("/", async (req, res) => {
   });
 });
 
-module.exports = router;
+export default usersRouter;

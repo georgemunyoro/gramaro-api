@@ -5,9 +5,9 @@ const bcrypt = require("bcrypt");
 const { handleEmptyData, handleUnexpectedError } = require("../utils");
 const { getDatabaseConnection } = require("../utils/db/connection");
 
-const router = express.Router();
+const loginRouter = express.Router();
 
-router.post("/", async (req, res) => {
+loginRouter.post("/", async (req, res) => {
   const { email, password } = req.body;
   if (email === null || password === null) {
     handleEmptyData(req, res);
@@ -43,4 +43,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default loginRouter;

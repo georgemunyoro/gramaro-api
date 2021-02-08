@@ -7,9 +7,9 @@ const nanoid = customAlphabet("1234567890abcdef_", 10);
 const { getDatabaseConnection } = require("../utils/db/connection");
 const { handleEmptyData, handleUnexpectedError } = require("../utils/index");
 
-const router = express.Router();
+const signupRouter = express.Router();
 
-router.post("/", async (req, res) => {
+notesRouter.post("/", async (req, res) => {
   const { username, password, email } = req.body;
   const uuid = nanoid(10);
 
@@ -62,4 +62,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default signupRouter;

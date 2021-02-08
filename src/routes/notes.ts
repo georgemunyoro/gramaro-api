@@ -3,9 +3,9 @@ const { getDatabaseConnection } = require("../utils/db/connection");
 
 const nanoid = require("nanoid").customAlphabet("1234567890abcdef_", 10);
 const express = require("express");
-const router = express.Router();
+const notesRouter = express.Router();
 
-router.get("/all", async (req, res) => {
+notesRouter.get("/all", async (req, res) => {
   try {
     const client = getDatabaseConnection();
     const { rows: notes } = await client.query("SELECT * FROM NOTES");
@@ -23,7 +23,7 @@ router.get("/all", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+notesRouter.post("/", async (req, res) => {
   const { title, contents, owner } = req.body;
   const uniqueNoteId = nanoid(12);
   try {
@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.patch("/trash/:noteId", async (req, res) => {
+notesRouter.patch("/trash/:noteId", async (req, res) => {
   const { noteId } = req.params;
   try {
     const databaseConnection = getDatabaseConnection();
@@ -72,7 +72,7 @@ router.patch("/trash/:noteId", async (req, res) => {
   }
 });
 
-router.patch("/:noteId", async (req, res) => {
+notesRouter.patch("/:noteId", async (req, res) => {
   const { noteId } = req.params;
   const { title, contents } = req.body;
   try {
@@ -97,7 +97,7 @@ router.patch("/:noteId", async (req, res) => {
   }
 });
 
-router.delete("/:noteId", async (req, res) => {
+notesRouter.delete("/:noteId", async (req, res) => {
   const { noteId } = req.params;
   try {
     const client = getDatabaseConnection();
@@ -117,7 +117,7 @@ router.delete("/:noteId", async (req, res) => {
   }
 });
 
-router.get("/u/:user", async (req, res) => {
+notesRouter.get("/u/:user", async (req, res) => {
   const { user } = req.params;
   try {
     const client = getDatabaseConnection();
@@ -137,7 +137,7 @@ router.get("/u/:user", async (req, res) => {
   }
 });
 
-router.get("/id/:noteId", async (req, res) => {
+notesRouter.get("/id/:noteId", async (req, res) => {
   const { noteId } = req.params;
   try {
     const client = getDatabaseConnection();
@@ -156,4 +156,4 @@ router.get("/id/:noteId", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default notesRouter;
