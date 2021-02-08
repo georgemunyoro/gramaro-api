@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/georgemunyoro/gramaro-api/compare/v1.0.4...v2.0.0) (2021-02-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* 
+
+### Bug Fixes
+
+* remove users endpoint for listing users ([0b6675a](https://github.com/georgemunyoro/gramaro-api/commit/0b6675ab5eeb1313bec6bf34d5cae0e60b50ed42))
+* **tsconfig.json:** set resolveJsonModules true in tsconfig ([fbb16ef](https://github.com/georgemunyoro/gramaro-api/commit/fbb16ef2c3f628c17192a3fca348449c79a83c4a))
+
 ### [1.0.4](https://github.com/georgemunyoro/gramaro-api/compare/v1.0.3...v1.0.4) (2021-02-07)
 
 
