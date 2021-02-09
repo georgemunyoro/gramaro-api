@@ -1,25 +1,55 @@
-export default function makeNoteDatabase({ getDatabaseConnection }) {
-    const findById = async () => {
-        
-    }
+import { makeNote } from "../entities/note";
+import { NoteInterface } from "../entities/note/note";
 
-    const findByUuid = async () => {
-
-    }
-
-    const create = async () => {
-
-    }
-
-    const update = async () => {
-
-    }
-
-    return Object.freeze({
-        findById,
-        findByUuid,
-        create,
-        update,
-        delete,
-    })
+export interface NoteDatabase {
+  create: () => any;
+  update: () => any;
+  remove: () => any;
+  findById: (id: string) => Promise<NoteInterface | null>;
+  findByUuid: () => {};
+  findByUser: (userId: number) => Promise<any>;
 }
+
+export const makeNoteDatabase = ({
+  getDatabaseConnection,
+}: {
+  getDatabaseConnection: () => any;
+}): NoteDatabase => {
+  const findById = async (id: string): Promise<NoteInterface | null> => {
+    try {
+      const db = await getDatabaseConnection();
+      const note = await db.notes.findUnique({
+        where: {
+          id,
+        },
+      });
+
+      return makeNote({
+        ...note,
+        contents: JSON.stringify(note.content),
+      });
+    } catch (error) {
+      console.error(error.message);
+      return null;
+    }
+  };
+
+  const findByUser = async (userId: number): Promise<any> => {};
+
+  const findByUuid = async () => {};
+
+  const create = async () => {};
+
+  const update = async () => {};
+
+  const remove = async () => {};
+
+  return Object.freeze({
+    findById,
+    findByUuid,
+    findByUser,
+    create,
+    update,
+    remove,
+  });
+};
