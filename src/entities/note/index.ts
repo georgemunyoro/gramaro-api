@@ -1,6 +1,3 @@
-import makeCreateNote from "../../useCases/notes/createNote";
-import { prisma } from "../../utils/db";
+import { buildMakeNote } from "./note";
 
-export const makeNote = makeCreateNote({
-  database: prisma,
-});
+export const makeNote = buildMakeNote({});
