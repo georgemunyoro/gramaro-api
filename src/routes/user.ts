@@ -1,14 +1,12 @@
+import makeExpressCallback from "../expressCallback";
+import { getUsers, deleteUser, updateUser, createUser } from "../controllers";
+
 const express = require("express");
+const userRouter = express.Router();
 
-const usersRouter = express.Router();
+userRouter.get("/:id", makeExpressCallback(getUsers));
+userRouter.delete("/:id", makeExpressCallback(deleteUser));
+userRouter.patch("/:id", makeExpressCallback(updateUser));
+userRouter.post("/", makeExpressCallback(createUser));
 
-usersRouter.get("/", async (req, res) => {
-  res.json({
-    message: "user",
-    data: {
-      user: req.body,
-    },
-  });
-});
-
-export default usersRouter;
+export default userRouter;
