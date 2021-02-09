@@ -19,9 +19,8 @@ app.use("/", rootRouter);
 
 const PORT = process.env.CI ? 5432 : process.env.PORT || 1234;
 
-app.listen(PORT, (error) => {
-  if (error) throw error;
-  console.log(`Server listening on PORT:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server started on port: ${PORT}`);
 });
 
 module.exports = app;
