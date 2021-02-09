@@ -34,9 +34,26 @@ export const makeNoteDatabase = ({
     }
   };
 
-  const findByUser = async (userId: number): Promise<any> => {};
+  const findByUser = async (userId: number): Promise<any> => {
+    try {
+      const db = await getDatabaseConnection();
+      const notes = await db.notes.findMany({
+        where: {
+          user: userId,
+        },
+      });
 
-  const findByUuid = async () => {};
+      return notes.map((note: any) =>
+        makeNote({
+          ...note,
+          contents: JSON.stringify(note.content),
+        })
+      );
+    } catch (error) {
+      console.error(error.message);
+      return null;
+    }
+  };
 
   const create = async () => {};
 
