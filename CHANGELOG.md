@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/georgemunyoro/gramaro-api/compare/v2.0.1...v2.0.2) (2021-02-09)
+
+
+### Bug Fixes
+
+* remove unused utils folder ([1351dab](https://github.com/georgemunyoro/gramaro-api/commit/1351dab5d0d71d259271a7f3ab651ed3e30218ad))
+
 ### [2.0.1](https://github.com/georgemunyoro/gramaro-api/compare/v2.0.0...v2.0.1) (2021-02-09)
 
 
