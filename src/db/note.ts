@@ -1,10 +1,11 @@
+import { PrismaClient } from "@prisma/client";
 import { makeNote } from "../entities/note";
 import { NoteInterface } from "../entities/note/note";
 
 export interface NoteDatabase {
   create: () => any;
-  update: () => any;
-  remove: () => any;
+  update: (noteId: string) => any;
+  remove: (noteId: string) => any;
   findById: (id: string) => Promise<NoteInterface | null>;
   findByUser: (userId: number) => Promise<any>;
 }
@@ -58,7 +59,18 @@ export const makeNoteDatabase = ({
 
   const update = async () => {};
 
-  const remove = async () => {};
+  const remove = async (noteId: string) => {
+    try {
+      const db = await getDatabaseConnection();
+      await db.notes.delete({
+        where: {
+          id: noteId,
+        },
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   return Object.freeze({
     findById,
