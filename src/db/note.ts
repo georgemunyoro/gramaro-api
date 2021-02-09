@@ -6,7 +6,6 @@ export interface NoteDatabase {
   update: () => any;
   remove: () => any;
   findById: (id: string) => Promise<NoteInterface | null>;
-  findByUuid: () => {};
   findByUser: (userId: number) => Promise<any>;
 }
 
@@ -63,7 +62,6 @@ export const makeNoteDatabase = ({
 
   return Object.freeze({
     findById,
-    findByUuid,
     findByUser,
     create,
     update,
