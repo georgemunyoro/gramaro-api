@@ -7,6 +7,8 @@ const { getDatabaseConnection } = require("../utils/db/connection");
 
 const loginRouter = express.Router();
 
+const USER_AUTHENTICATION_FAILED = "User authentication failed";
+
 loginRouter.post("/", async (req, res) => {
   const { email, password } = req.body;
   if (email === null || password === null) {
@@ -19,13 +21,16 @@ loginRouter.post("/", async (req, res) => {
       );
 
       if (user.length === 0) {
-        res.json({ message: "Could not find user" });
+        res.json({ message: USER_AUTHENTICATION_FAILED });
         return;
       }
 
-      const isPasswordCorrect = await bcrypt.compare(password, user[0].password);
+      const isPasswordCorrect = await bcrypt.compare(
+        password,
+        user[0].password
+      );
       if (!isPasswordCorrect) {
-        res.json({ message: "Incorrect password" });
+        res.json({ message: USER_AUTHENTICATION_FAILED });
         return;
       }
 
